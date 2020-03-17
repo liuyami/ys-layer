@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="wrap">
+    <button>fadeIn</button>
+    <input type="text" placeholder="修改loding提示文字">
+  </div>
+
+  <script src="js/index.js"></script>
+
+  <script>
+    var loding = {
+      type: 'loding',  //String 默认loding 接收 information loding  inquiry
+      config: {
+        // txt: '',  //可选  默认为 空
+        isClickHide: true, //可选  默认false  注册点击隐藏
+        // url: 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a' //String可选
+      }
+    };
+
+
+    var elasticLayer1 = new ElasticLayer(loding);
+
+    var btn = document.getElementsByTagName('button'),
+        ipt = document.getElementsByTagName('input');
+
+    btn[0].onclick = function () {
+      elasticLayer1.fadeIn() //接收一个Number时间参数  默认400 
+      // 隐藏
+      // setTimeout(function () {
+      //   elasticLayer.fadeOut()
+      // }, 1000)
+    }
+
+    ipt[0].onblur = function () {
+      elasticLayer1.init({
+        txt: this.value
+      })
+    }
+
+  </script>
+</body>
+</html>
