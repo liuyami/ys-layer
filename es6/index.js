@@ -23,15 +23,19 @@ class ElasticLayer{
     switch(this.type){
       case 'loding':
         let {url = 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a', txt = '', isClickHide = false} = config;
-
+        //注册点击隐藏loding事件
         isClickHide && layerBox.addEventListener('click', this.fadeOut.bind(this, 400,))
-
+        //添加node
         layerBox.innerHTML = ` <div class="layerBox-loding">
                                   <div class="loding-img-box">
                                     <img src="${url}" alt="">
                                   </div>
                                   <p>${txt}</p>
                                 </div>`;
+        break;
+      case 'information':
+        let {txt = '好像忘记输入文字了', success = function () {alert('好像忘记传回调函数了')}} = config;
+        layerBox.innerHTML = ``;
         break;
       default:
         break;
