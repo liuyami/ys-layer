@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <button>loding显示</button>
+  <input type="text" placeholder="改变loding文字">
+  <button>information信息显示</button>
+  <button>inquiry对话框显示</button>
+
+  <button>inquiry修改内容</button>
+
+
+  <div class="text" style="font-size: 26px;"></div>
+
+
+  <script src="js/index.js"></script>
+  <script>
+    var btn = document.getElementsByTagName('button'),
+        ldIpt = document.getElementsByTagName('input'),
+        text = document.getElementsByClassName('text')[0];
+
+    // loding 配置
+    var loding = {
+      type: 'loding',  //类型String  接收 information loding  inquiry
+      config: {
+        // txt: '',  //可选  默认为 空
+        isClickHide: true, //可选  默认false  注册点击隐藏
+        // url: 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a' //String可选
+      }
+    };
+
+    var elasticLayer1 = new ElasticLayer(loding);
+
+    btn[0].onclick = function () {
+      elasticLayer1.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
+      // 隐藏
+      // setTimeout(function () {
+      //   elasticLayer.fadeOut()  // 隐藏 接收一个Number时间参数（可选）  默认400 
+      // }, 1000)
+    }
+    ldIpt[0].onblur = function () {
+      elasticLayer1.init({
+        txt: this.value
+      })
+    }
+
+
+    // information配置
+    var information = {
+      type: 'information',  //类型String  接收 information loding  inquiry
+      config: {
+        txt: '确定关闭当前页面？',
+        success: function () {
+          text.innerHTML = '信息框success'
+          elasticLayer2.fadeOut()
+        }
+      }
+    };
+    
+    var elasticLayer2 = new ElasticLayer(information);
+    btn[1].onclick = function () {
+      elasticLayer2.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
+    }
+
+
+    // inquiry对话
+    var inquiry = {
+      type: 'inquiry',
+      config: {
+        txt: '确定进入下一页？',
+        success: function () {
+          text.innerHTML = '对话框success'
+          elasticLayer3.fadeOut()
+        },
+        error: function () {
+          text.innerHTML = '对话框error'
+          elasticLayer3.fadeOut()
+        }
+      }
+    }
+    var elasticLayer3 = new ElasticLayer(inquiry);
+    btn[2].onclick = function () {
+      elasticLayer3.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
+    }
+
+    btn[3].onclick = function () {
+      elasticLayer3.init({
+        txt: '修改后的内容',
+        success: function () {
+          text.innerHTML = '对话框success修改后的内容'
+          elasticLayer3.fadeOut()
+        },
+        error: function () {
+          text.innerHTML = '对话框error修改后的内容'
+          elasticLayer3.fadeOut()
+        }
+      })
+    }
+  </script>
+</body>
+</html>
