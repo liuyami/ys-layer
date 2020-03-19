@@ -22,8 +22,8 @@ class ElasticLayer{
     if(this.type === 'loding') {
       let {url = 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a', txt = '', isClickHide = false} = config;
         //注册点击隐藏loding事件
-        isClickHide && layerBox.addEventListener('click', this.fadeOut.bind(this, 400,))
-        //添加node
+        isClickHide ? layerBox.onclick = this.fadeOut.bind(this, 400,) : layerBox.onclick = function() {};
+
         layerBox.innerHTML = ` <div class="ly-loding">
                                   <div class="loding-img-box">
                                     <img src="${url}" alt="">
@@ -34,10 +34,10 @@ class ElasticLayer{
 
     // information 信息框
     if(this.type === 'information') {
-      let {txt, success} = config;
+      let {txt, btn, success} = config;
         layerBox.innerHTML = `<div class="ly-information"">
                                 <p>${txt}</p>
-                                <div class="ly-info-btn" id="ly-info-btn">按钮</div>
+                                <div class="ly-info-btn" id="ly-info-btn">${btn}</div>
                               </div>`;
 
         layerBox.getElementsByClassName('ly-info-btn')[0].onclick = success;
@@ -45,19 +45,18 @@ class ElasticLayer{
 
     // inquiry 询问框
     if(this.type === 'inquiry') {
-      let {txt, success, error} = config;
+      let {txt, success, error, btns} = config;
       layerBox.innerHTML = `<div class="ly-inquiry">
                               <p>${txt}</p>
                               <div class="ly-inquiry-btns">
-                                <div class="ly-inquiry-success">确定</div>
-                                <div class="ly-inquiry-error">取消</div>
+                                <div class="ly-inquiry-success">${btns[0]}</div>
+                                <div class="ly-inquiry-error">${btns[1]}</div>
                               </div>
                             </div>`;
-      console.log(layerBox)
+
       layerBox.getElementsByClassName('ly-inquiry-success')[0].onclick = success;
       layerBox.getElementsByClassName('ly-inquiry-error')[0].onclick = error;
     }
-
 
     this.body.appendChild(this.layerBox)
   }
@@ -68,6 +67,8 @@ class ElasticLayer{
     layerBox.style.zIndex = '99999';
     layerBox.style.transition = `opacity ${showT / 1000}s`;
     layerBox.style.opacity = '1';
+
+    return this
   }
 
   fadeOut(hideTime) {
@@ -79,5 +80,7 @@ class ElasticLayer{
     setTimeout( () => {
       layerBox.style.zIndex = '-1';
     }, hideT)
+
+    return this
   }
 }

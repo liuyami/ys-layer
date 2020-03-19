@@ -1,11 +1,3 @@
-body {
-  margin: 0;
-}
-.wrap {
-  width: 100%;
-  height: 100vh;
-  background: orange;
-}
 .layerBox {
   display: -webkit-box;
   display: flex;
@@ -63,10 +55,10 @@ body {
 }
 .layerBox .ly-information .ly-info-btn {
   width: 100%;
-  padding: 5px 20px;
+  padding: 1.68918919vh 0;
   background: #F2F2F2;
   border: 1px solid #D0D0D0;
-  color: #40AFFE;
+  color: #000;
   text-align: center;
 }
 .layerBox .ly-inquiry {
@@ -89,11 +81,11 @@ body {
 }
 .layerBox .ly-inquiry .ly-inquiry-btns div {
   -webkit-box-flex: 1;
-          flex: auto;
-  padding: 5px 20px;
+          flex: 1;
+  padding: 1.68918919vh 0;
   background: #F2F2F2;
   border: 1px solid #D0D0D0;
-  color: #40AFFE;
+  color: #000;
   text-align: center;
 }
 .layerBox .ly-inquiry .ly-inquiry-btns #ly-inquiry-error {

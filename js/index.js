@@ -39,17 +39,18 @@ var ElasticLayer = function () {
             isClickHide = _config$isClickHide === undefined ? false : _config$isClickHide;
         //注册点击隐藏loding事件
 
-        isClickHide && layerBox.addEventListener('click', this.fadeOut.bind(this, 400));
-        //添加node
+        isClickHide ? layerBox.onclick = this.fadeOut.bind(this, 400) : layerBox.onclick = function () {};
+
         layerBox.innerHTML = ' <div class="ly-loding">\n                                  <div class="loding-img-box">\n                                    <img src="' + url + '" alt="">\n                                  </div>\n                                  <p>' + txt + '</p>\n                                </div>';
       }
 
       // information 信息框
       if (this.type === 'information') {
         var _txt = config.txt,
+            btn = config.btn,
             success = config.success;
 
-        layerBox.innerHTML = '<div class="ly-information"">\n                                <p>' + _txt + '</p>\n                                <div class="ly-info-btn" id="ly-info-btn">\u6309\u94AE</div>\n                              </div>';
+        layerBox.innerHTML = '<div class="ly-information"">\n                                <p>' + _txt + '</p>\n                                <div class="ly-info-btn" id="ly-info-btn">' + btn + '</div>\n                              </div>';
 
         layerBox.getElementsByClassName('ly-info-btn')[0].onclick = success;
       }
@@ -58,10 +59,11 @@ var ElasticLayer = function () {
       if (this.type === 'inquiry') {
         var _txt2 = config.txt,
             _success = config.success,
-            error = config.error;
+            error = config.error,
+            btns = config.btns;
 
-        layerBox.innerHTML = '<div class="ly-inquiry">\n                              <p>' + _txt2 + '</p>\n                              <div class="ly-inquiry-btns">\n                                <div class="ly-inquiry-success">\u786E\u5B9A</div>\n                                <div class="ly-inquiry-error">\u53D6\u6D88</div>\n                              </div>\n                            </div>';
-        console.log(layerBox);
+        layerBox.innerHTML = '<div class="ly-inquiry">\n                              <p>' + _txt2 + '</p>\n                              <div class="ly-inquiry-btns">\n                                <div class="ly-inquiry-success">' + btns[0] + '</div>\n                                <div class="ly-inquiry-error">' + btns[1] + '</div>\n                              </div>\n                            </div>';
+
         layerBox.getElementsByClassName('ly-inquiry-success')[0].onclick = _success;
         layerBox.getElementsByClassName('ly-inquiry-error')[0].onclick = error;
       }
@@ -77,6 +79,8 @@ var ElasticLayer = function () {
       layerBox.style.zIndex = '99999';
       layerBox.style.transition = 'opacity ' + showT / 1000 + 's';
       layerBox.style.opacity = '1';
+
+      return this;
     }
   }, {
     key: 'fadeOut',
@@ -89,6 +93,8 @@ var ElasticLayer = function () {
       setTimeout(function () {
         layerBox.style.zIndex = '-1';
       }, hideT);
+
+      return this;
     }
   }]);
 

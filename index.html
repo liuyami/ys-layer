@@ -7,100 +7,141 @@
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <button>loding显示</button>
-  <input type="text" placeholder="改变loding文字">
-  <button>information信息显示</button>
-  <button>inquiry对话框显示</button>
+  <button class="ldBtn">显示loding</button>
+  <button class="ldBtn">修改loding文字和禁止点击隐藏</button>
 
-  <button>inquiry修改内容</button>
+  <button class="infoBtn">显示information</button>
+  <button class="infoBtn">修改information</button>
 
+  <button class="iqBtn">显示inquiry对话框</button>
+  <button class="iqBtn">修改inquiry对话框</button>
 
-  <div class="text" style="font-size: 26px;"></div>
+  <div class="text"></div>
 
-
+  <!-- es6代码 -->
+  <!-- <script src="es6/index.js"></script> -->
+  
+  <!-- 编译后es5代码 -->
   <script src="js/index.js"></script>
   <script>
-    var btn = document.getElementsByTagName('button'),
-        ldIpt = document.getElementsByTagName('input'),
-        text = document.getElementsByClassName('text')[0];
+    var text = document.getElementsByClassName('text')[0];
+    /*
+      loding =================================================
+    *
+    *
+    */
 
-    // loding 配置
+    var ldBtn = document.getElementsByClassName('ldBtn');
     var loding = {
-      type: 'loding',  //类型String  接收 information loding  inquiry
+      type: 'loding',  			//必须 类型String  loding
       config: {
-        // txt: '',  //可选  默认为 空
-        isClickHide: true, //可选  默认false  注册点击隐藏
-        // url: 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a' //String可选
+        // url: '',			    //可选 loding图片  提示！！！传空字符串 默认图不显示
+        txt: '',  				//可选 默认为空  提示文字
+        isClickHide: true, 		//可选  默认false  点击隐藏loding
       }
     };
 
-    var elasticLayer1 = new ElasticLayer(loding);
-
-    btn[0].onclick = function () {
-      elasticLayer1.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
-      // 隐藏
-      // setTimeout(function () {
-      //   elasticLayer.fadeOut()  // 隐藏 接收一个Number时间参数（可选）  默认400 
-      // }, 1000)
+    var elasticLayerLoding = new ElasticLayer(loding);
+    ldBtn[0].onclick = function () {
+      elasticLayerLoding.fadeIn()
     }
-    ldIpt[0].onblur = function () {
-      elasticLayer1.init({
-        txt: this.value
+    ldBtn[1].onclick = function () {
+      elasticLayerLoding.init({
+        // url: '',			    //可选 loding图片  提示！！！传空字符串 默认图不显示
+        txt: '修改了文字',  				//可选 默认为空  提示文字
+        isClickHide: false, 		//可选  默认false  点击隐藏loding
       })
+      elasticLayerLoding.fadeIn()
+
+      setTimeout( () => {
+        elasticLayerLoding.fadeOut()
+      }, 2000)
     }
 
 
-    // information配置
-    var information = {
-      type: 'information',  //类型String  接收 information loding  inquiry
-      config: {
-        txt: '确定关闭当前页面？',
-        success: function () {
-          text.innerHTML = '信息框success'
-          elasticLayer2.fadeOut()
-        }
-      }
-    };
     
-    var elasticLayer2 = new ElasticLayer(information);
-    btn[1].onclick = function () {
-      elasticLayer2.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
+
+    /*
+      information单选框配置  =============================================
+    *
+    *
+    */
+
+    var infoBtn = document.getElementsByClassName('infoBtn');
+
+    var information = {
+      type: 'information',  				//必须 类型String  接收 information
+      config: {
+        txt: '确定关闭当前页面？',			  //必须  说明文字
+        btn: '确定按钮',					 //必须  按钮
+        success: function () {				//必须  回调函数
+          elasticLayerInformation.fadeOut()
+        }
+      }
+    };
+
+    var elasticLayerInformation = new ElasticLayer(information);
+
+    infoBtn[0].onclick = function () {
+      elasticLayerInformation.fadeIn()
+    }
+    infoBtn[1].onclick = function () {
+      elasticLayerInformation.init({
+        txt: '改变了文字',			  //必须  说明文字
+        btn: '修改了按钮',					 //必须  按钮
+        success: function () {				//必须  回调函数
+          text.innerHTML = '修改了information单选框配置';
+          elasticLayerInformation.fadeOut()
+        }
+      })
+      elasticLayerInformation.fadeIn()
     }
 
 
-    // inquiry对话
+    /*
+      inquiry询问框对话  =============================================
+    *
+    *
+    */
+
+    var iqBtn = document.getElementsByClassName('iqBtn');
     var inquiry = {
-      type: 'inquiry',
+      type: 'inquiry',						//必须 类型String  接收 inquiry
       config: {
-        txt: '确定进入下一页？',
-        success: function () {
-          text.innerHTML = '对话框success'
-          elasticLayer3.fadeOut()
+        txt: '是否关闭这个内容？',        	  //必须 类型String 
+        btns: ['确定', '取消'],   	 	     //必须 Array
+        success: function () {              //必须 确定按钮回调
+          elasticLayerInquiry.fadeOut()
         },
-        error: function () {
-          text.innerHTML = '对话框error'
-          elasticLayer3.fadeOut()
+        error: function () {		        //必须 取消按钮回调
+          elasticLayerInquiry.fadeOut()
         }
       }
     }
-    var elasticLayer3 = new ElasticLayer(inquiry);
-    btn[2].onclick = function () {
-      elasticLayer3.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
-    }
 
-    btn[3].onclick = function () {
-      elasticLayer3.init({
-        txt: '修改后的内容',
-        success: function () {
-          text.innerHTML = '对话框success修改后的内容'
-          elasticLayer3.fadeOut()
+    var elasticLayerInquiry = new ElasticLayer(inquiry);
+
+    iqBtn[0].onclick = function () {
+      elasticLayerInquiry.fadeIn()
+    }
+    iqBtn[1].onclick = function () {
+      elasticLayerInquiry.init({
+        txt: '修改后的是否关闭这个内容？',        	  //必须 类型String 
+        btns: ['修改后的确定', '修改后的取消'],   	 	     //必须 Array
+        success: function () {              //必须 确定按钮回调
+          text.innerHTML = 'success修改后inquiry'
+          elasticLayerInquiry.fadeOut()
         },
-        error: function () {
-          text.innerHTML = '对话框error修改后的内容'
-          elasticLayer3.fadeOut()
+        error: function () {		        //必须 取消按钮回调
+          text.innerHTML = 'error修改后inquiry'
+          elasticLayerInquiry.fadeOut()
         }
       })
+
+      elasticLayerInquiry.fadeIn()
     }
+
+  
   </script>
 </body>
 </html>
