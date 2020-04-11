@@ -19,31 +19,33 @@
     height: auto;
   }
 
-  .ly-loding,
-  .ly-information,
-  .ly-inquiry{
+  .ly-loading,
+  .ly-info,
+  .ly-confirm{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     width: 600/@vw;
+    max-width: 400px;
     padding-top: 20/@vh;
     overflow: hidden;
 
-    .loding-img-box{
+    .loading-img-box{
       width: 120/@vw;
     }
 
     p{
       margin-top: 18/@vh;
-      font-size: 28/@vw;
+      // font-size: 28/@vw;
+      font-size: 20px;
       color: #fff;
       text-align: center;
     }
   }
 
   //信息
-  .ly-information{
+  .ly-info{
     background: #fff;
     border-radius: 5px;
 
@@ -58,11 +60,12 @@
       border: 1px solid #D0D0D0;
       color: #000;
       text-align: center;
+      cursor: pointer;
     }
   }
 
   //询问框
-  .ly-inquiry{
+  .ly-confirm{
     background: #fff;
     border-radius: 5px;
 
@@ -71,7 +74,7 @@
       color: #333;
     }
 
-    .ly-inquiry-btns{
+    .ly-confirm-btns{
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -86,9 +89,10 @@
         border: 1px solid #D0D0D0;
         color: #000;
         text-align: center;
+        cursor: pointer;
       }
 
-      #ly-inquiry-error{
+      #ly-confirm-error{
         color: #000;
       }
     }

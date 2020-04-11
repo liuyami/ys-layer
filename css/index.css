@@ -17,9 +17,9 @@
   width: 100%;
   height: auto;
 }
-.layerBox .ly-loding,
-.layerBox .ly-information,
-.layerBox .ly-inquiry {
+.layerBox .ly-loading,
+.layerBox .ly-info,
+.layerBox .ly-confirm {
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
@@ -29,47 +29,49 @@
   -webkit-box-align: center;
           align-items: center;
   width: 80vw;
+  max-width: 400px;
   padding-top: 1.35135135vh;
   overflow: hidden;
 }
-.layerBox .ly-loding .loding-img-box,
-.layerBox .ly-information .loding-img-box,
-.layerBox .ly-inquiry .loding-img-box {
+.layerBox .ly-loading .loading-img-box,
+.layerBox .ly-info .loading-img-box,
+.layerBox .ly-confirm .loading-img-box {
   width: 16vw;
 }
-.layerBox .ly-loding p,
-.layerBox .ly-information p,
-.layerBox .ly-inquiry p {
+.layerBox .ly-loading p,
+.layerBox .ly-info p,
+.layerBox .ly-confirm p {
   margin-top: 1.21621622vh;
-  font-size: 3.73333333vw;
+  font-size: 20px;
   color: #fff;
   text-align: center;
 }
-.layerBox .ly-information {
+.layerBox .ly-info {
   background: #fff;
   border-radius: 5px;
 }
-.layerBox .ly-information p {
+.layerBox .ly-info p {
   padding: 3.37837838vh 4vw;
   color: #333;
 }
-.layerBox .ly-information .ly-info-btn {
+.layerBox .ly-info .ly-info-btn {
   width: 100%;
   padding: 1.68918919vh 0;
   background: #F2F2F2;
   border: 1px solid #D0D0D0;
   color: #000;
   text-align: center;
+  cursor: pointer;
 }
-.layerBox .ly-inquiry {
+.layerBox .ly-confirm {
   background: #fff;
   border-radius: 5px;
 }
-.layerBox .ly-inquiry p {
+.layerBox .ly-confirm p {
   padding: 3.37837838vh 4vw;
   color: #333;
 }
-.layerBox .ly-inquiry .ly-inquiry-btns {
+.layerBox .ly-confirm .ly-confirm-btns {
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: horizontal;
@@ -79,7 +81,7 @@
   width: 100%;
   margin-top: 10px;
 }
-.layerBox .ly-inquiry .ly-inquiry-btns div {
+.layerBox .ly-confirm .ly-confirm-btns div {
   -webkit-box-flex: 1;
           flex: 1;
   padding: 1.68918919vh 0;
@@ -87,7 +89,8 @@
   border: 1px solid #D0D0D0;
   color: #000;
   text-align: center;
+  cursor: pointer;
 }
-.layerBox .ly-inquiry .ly-inquiry-btns #ly-inquiry-error {
+.layerBox .ly-confirm .ly-confirm-btns #ly-confirm-error {
   color: #000;
 }
