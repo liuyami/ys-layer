@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="//common.yscase.com/js/yslayer.css">
 </head>
 <body>
   <button class="ldBtn">显示loading</button>
@@ -18,11 +18,10 @@
 
   <div class="text"></div>
 
-  <!-- es6代码 -->
-  <!-- <script src="es6/index.js"></script> -->
-  
-  <!-- 编译后es5代码 -->
-  <script src="js/index.js"></script>
+
+
+
+  <script src="//common.yscase.com/js/yslayer.js"></script>
   <script>
     var text = document.getElementsByClassName('text')[0];
     /*
@@ -111,9 +110,11 @@
         txt: '是否关闭这个内容？',        	  //必须 类型String 
         btns: ['确定', '取消'],   	 	     //必须 Array
         success: function () {              //必须 确定按钮回调
+          text.innerHTML = 'success  confirm'
           ysLayerconfirm.fadeOut()
         },
         error: function () {		        //必须 取消按钮回调
+          text.innerHTML = 'error  confirm'
           ysLayerconfirm.fadeOut()
         }
       }
