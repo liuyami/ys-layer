@@ -1,8 +1,8 @@
-class ElasticLayer{
+class YsLayer{
   constructor (opt) {
     this.type = opt.type;
-    if(this.type !== 'information' && this.type !== 'inquiry' && this.type !== 'loding') {
-      console.log('类型填写错误 只接收loding information inquiry')
+    if(this.type !== 'info' && this.type !== 'confirm' && this.type !== 'loading') {
+      console.log('类型填写错误 只接收loading info confirm')
       return
     }
 
@@ -18,24 +18,24 @@ class ElasticLayer{
     layerBox.style.opacity = '0';
     layerBox.style.zIndex = '-1';
 
-    // loding
-    if(this.type === 'loding') {
+    // loading
+    if(this.type === 'loading') {
       let {url = 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a', txt = '', isClickHide = false} = config;
-        //注册点击隐藏loding事件
+        //注册点击隐藏loading事件
         isClickHide ? layerBox.onclick = this.fadeOut.bind(this, 400,) : layerBox.onclick = function() {};
 
-        layerBox.innerHTML = ` <div class="ly-loding">
-                                  <div class="loding-img-box">
+        layerBox.innerHTML = ` <div class="ly-loading">
+                                  <div class="loading-img-box">
                                     <img src="${url}" alt="">
                                   </div>
                                   <p>${txt}</p>
                                 </div>`;
     }
 
-    // information 信息框
-    if(this.type === 'information') {
+    // info 信息框
+    if(this.type === 'info') {
       let {txt, btn, success} = config;
-        layerBox.innerHTML = `<div class="ly-information"">
+        layerBox.innerHTML = `<div class="ly-info"">
                                 <p>${txt}</p>
                                 <div class="ly-info-btn" id="ly-info-btn">${btn}</div>
                               </div>`;
@@ -43,19 +43,19 @@ class ElasticLayer{
         layerBox.getElementsByClassName('ly-info-btn')[0].onclick = success;
     }
 
-    // inquiry 询问框
-    if(this.type === 'inquiry') {
+    // confirm 询问框
+    if(this.type === 'confirm') {
       let {txt, success, error, btns} = config;
-      layerBox.innerHTML = `<div class="ly-inquiry">
+      layerBox.innerHTML = `<div class="ly-confirm">
                               <p>${txt}</p>
-                              <div class="ly-inquiry-btns">
-                                <div class="ly-inquiry-success">${btns[0]}</div>
-                                <div class="ly-inquiry-error">${btns[1]}</div>
+                              <div class="ly-confirm-btns">
+                                <div class="ly-confirm-success">${btns[0]}</div>
+                                <div class="ly-confirm-error">${btns[1]}</div>
                               </div>
                             </div>`;
 
-      layerBox.getElementsByClassName('ly-inquiry-success')[0].onclick = success;
-      layerBox.getElementsByClassName('ly-inquiry-error')[0].onclick = error;
+      layerBox.getElementsByClassName('ly-confirm-success')[0].onclick = success;
+      layerBox.getElementsByClassName('ly-confirm-error')[0].onclick = error;
     }
 
     this.body.appendChild(this.layerBox)

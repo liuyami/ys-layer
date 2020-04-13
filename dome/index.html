@@ -4,103 +4,145 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="//common.yscase.com/js/yslayer.css">
 </head>
 <body>
-  <button>loding显示</button>
-  <input type="text" placeholder="改变loding文字">
-  <button>information信息显示</button>
-  <button>inquiry对话框显示</button>
+  <button class="ldBtn">显示loading</button>
+  <button class="ldBtn">修改loading文字和禁止点击隐藏</button>
 
-  <button>inquiry修改内容</button>
+  <button class="infoBtn">显示info</button>
+  <button class="infoBtn">修改info</button>
+
+  <button class="iqBtn">显示confirm对话框</button>
+  <button class="iqBtn">修改confirm对话框</button>
+
+  <div class="text"></div>
 
 
-  <div class="text" style="font-size: 26px;"></div>
 
 
-  <script src="js/index.js"></script>
+  <script src="//common.yscase.com/js/yslayer.js"></script>
   <script>
-    var btn = document.getElementsByTagName('button'),
-        ldIpt = document.getElementsByTagName('input'),
-        text = document.getElementsByClassName('text')[0];
+    var text = document.getElementsByClassName('text')[0];
+    /*
+      loading =================================================
+    *
+    *
+    */
 
-    // loding 配置
-    var loding = {
-      type: 'loding',  //类型String  接收 information loding  inquiry
+    var ldBtn = document.getElementsByClassName('ldBtn');
+    var loading = {
+      type: 'loading',  			//必须 类型String  loading
       config: {
-        // txt: '',  //可选  默认为 空
-        isClickHide: true, //可选  默认false  注册点击隐藏
-        // url: 'https://iknow-pic.cdn.bcebos.com/3bf33a87e950352adb732f175043fbf2b2118b9a' //String可选
+        // url: '',			    //可选 loading图片  提示！！！传空字符串 默认图不显示
+        txt: '',  				//可选 默认为空  提示文字
+        isClickHide: true, 		//可选  默认false  点击隐藏loading
       }
     };
 
-    var elasticLayer1 = new ElasticLayer(loding);
-
-    btn[0].onclick = function () {
-      elasticLayer1.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
-      // 隐藏
-      // setTimeout(function () {
-      //   elasticLayer.fadeOut()  // 隐藏 接收一个Number时间参数（可选）  默认400 
-      // }, 1000)
+    var ysLayerloading = new YsLayer(loading);
+    ldBtn[0].onclick = function () {
+      ysLayerloading.fadeIn()
     }
-    ldIpt[0].onblur = function () {
-      elasticLayer1.init({
-        txt: this.value
+    ldBtn[1].onclick = function () {
+      ysLayerloading.init({
+        // url: '',			    //可选 loading图片  提示！！！传空字符串 默认图不显示
+        txt: '修改了文字',  				//可选 默认为空  提示文字
+        isClickHide: false, 		//可选  默认false  点击隐藏loading
       })
+      ysLayerloading.fadeIn()
+
+      setTimeout( () => {
+        ysLayerloading.fadeOut()
+      }, 2000)
     }
+  
 
-
-    // information配置
-    var information = {
-      type: 'information',  //类型String  接收 information loding  inquiry
-      config: {
-        txt: '确定关闭当前页面？',
-        success: function () {
-          text.innerHTML = '信息框success'
-          elasticLayer2.fadeOut()
-        }
-      }
-    };
     
-    var elasticLayer2 = new ElasticLayer(information);
-    btn[1].onclick = function () {
-      elasticLayer2.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
+
+    /*
+      info单选框配置  =============================================
+    *
+    *
+    */
+
+    var infoBtn = document.getElementsByClassName('infoBtn');
+
+    var info = {
+      type: 'info',  				//必须 类型String  接收 info
+      config: {
+        txt: '确定关闭当前页面？',			  //必须  说明文字
+        btn: '确定按钮',					 //必须  按钮
+        success: function () {				//必须  回调函数
+          ysLayerinfo.fadeOut()
+        }
+      }
+    };
+
+    var ysLayerinfo = new YsLayer(info);
+
+    infoBtn[0].onclick = function () {
+      ysLayerinfo.fadeIn()
+    }
+    infoBtn[1].onclick = function () {
+      ysLayerinfo.init({
+        txt: '改变了文字',			  //必须  说明文字
+        btn: '修改了按钮',					 //必须  按钮
+        success: function () {				//必须  回调函数
+          text.innerHTML = '修改了info单选框配置';
+          ysLayerinfo.fadeOut()
+        }
+      })
+      ysLayerinfo.fadeIn()
     }
 
 
-    // inquiry对话
-    var inquiry = {
-      type: 'inquiry',
+    /*
+      confirm询问框对话  =============================================
+    *
+    *
+    */
+
+    var iqBtn = document.getElementsByClassName('iqBtn');
+    var confirm = {
+      type: 'confirm',						//必须 类型String  接收 confirm
       config: {
-        txt: '确定进入下一页？',
-        success: function () {
-          text.innerHTML = '对话框success'
-          elasticLayer3.fadeOut()
+        txt: '是否关闭这个内容？',        	  //必须 类型String 
+        btns: ['确定', '取消'],   	 	     //必须 Array
+        success: function () {              //必须 确定按钮回调
+          text.innerHTML = 'success  confirm'
+          ysLayerconfirm.fadeOut()
         },
-        error: function () {
-          text.innerHTML = '对话框error'
-          elasticLayer3.fadeOut()
+        error: function () {		        //必须 取消按钮回调
+          text.innerHTML = 'error  confirm'
+          ysLayerconfirm.fadeOut()
         }
       }
     }
-    var elasticLayer3 = new ElasticLayer(inquiry);
-    btn[2].onclick = function () {
-      elasticLayer3.fadeIn() // 显示 接收一个Number时间参数（可选）  默认400 
-    }
 
-    btn[3].onclick = function () {
-      elasticLayer3.init({
-        txt: '修改后的内容',
-        success: function () {
-          text.innerHTML = '对话框success修改后的内容'
-          elasticLayer3.fadeOut()
+    var ysLayerconfirm = new YsLayer(confirm);
+
+    iqBtn[0].onclick = function () {
+      ysLayerconfirm.fadeIn()
+    }
+    iqBtn[1].onclick = function () {
+      ysLayerconfirm.init({
+        txt: '修改后的是否关闭这个内容？',        	  //必须 类型String 
+        btns: ['修改后的确定', '修改后的取消'],   	 	     //必须 Array
+        success: function () {              //必须 确定按钮回调
+          text.innerHTML = 'success修改后confirm'
+          ysLayerconfirm.fadeOut()
         },
-        error: function () {
-          text.innerHTML = '对话框error修改后的内容'
-          elasticLayer3.fadeOut()
+        error: function () {		        //必须 取消按钮回调
+          text.innerHTML = 'error修改后confirm'
+          ysLayerconfirm.fadeOut()
         }
       })
+
+      ysLayerconfirm.fadeIn()
     }
+
+  
   </script>
 </body>
 </html>
